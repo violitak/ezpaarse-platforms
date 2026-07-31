@@ -7,9 +7,10 @@
   "docurl": "http://analyses.ezpaarse.org/platforms/5fb845715d8f7e8b4aa0902d",
   "domains": [
     "www.worldbookonline.com",
+    "worldbookonline.com",
     "media.worldbookonline.com",
     "bth.worldbook.com"
   ],
-  "version": "2020-11-20",
+  "version": "2026-07-31",
   "status": "beta"
 }
