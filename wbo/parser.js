@@ -93,11 +93,20 @@ module.exports = new Parser(function analyseEC(parsedUrl, ec) {
     // https://bth.worldbook.com/bth/?cat=468
     result.rtype = 'TOC';
     result.mime = 'HTML';
-  } else if ((match = /^\/([a-z-]+)\/$/i.exec(path)) !== null) {
+  } else if (/^\/home\/?$/i.test(path)) {
+    // https://www.worldbookonline.com/home/
+    // platform-level product chooser, reached when the subscription does not
+    // cover the requested section: no single database is being consulted
+    result.rtype = 'TOC';
+    result.mime = 'HTML';
+    result.unitid = 'home';
+  } else if ((match = /^\/([a-z-]+)(?:\/(?:home)?)?$/i.exec(path)) !== null) {
     // https://www.worldbookonline.com/wbel/#/stories/bk000022/en-US?category=transportation
     // https://www.worldbookonline.com/wbel/#/videos/vd001246?category=weather
     // https://www.worldbookonline.com/student-new/#/search/snow%20leopard/type/ar?searchType=basicsearch
-    //https://www.worldbookonline.com/student-new/#/article/home/ar319960/snow%20leopard
+    // https://www.worldbookonline.com/student-new/#/article/home/ar319960/snow%20leopard
+    // https://www.worldbookonline.com/wbtimelines/home?subacct=CD21408
+    // /wbtimelines and /wbtimelines/ both redirect to /wbtimelines/home
     result.mime = 'HTML';
     result.db_id = match[1];
     let hashMatch;
@@ -115,6 +124,10 @@ module.exports = new Parser(function analyseEC(parsedUrl, ec) {
       result.rtype = 'VIDEO';
       result.title_id = hashMatch[1];
       result.unitid = hashMatch[1];
+    } else {
+      // section landing page: no individual resource consulted yet
+      result.rtype = 'TOC';
+      result.unitid = match[1];
     }
   }
 
