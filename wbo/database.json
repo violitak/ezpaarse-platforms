@@ -1,10 +1,15 @@
 {
   "ewol": "Early Learning",
+  "wbel": "Early Learning",
   "kids": "Kids",
+  "kids-new": "Kids",
   "discover": "Discover",
+  "wbdiscover": "Discover",
   "student": "Student",
+  "student-new": "Student",
   "advanced": "Advanced",
   "wbtimelines": "Timelines",
+  "activitycorner": "Activity Corner",
   "decouverte": "L’Encyclopedia Decouverte",
   "dramaticlearning": "Dramatic Learning",
   "eeh": "Enciclopedia Estudiantil Hallazgos"
