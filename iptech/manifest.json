@@ -1,0 +1,13 @@
+{
+  "longname": "IPTECH",
+  "name": "iptech",
+  "describe": "Recognizes the accesses to the platform IPTECH",
+  "contact": "ChaoYin Yang",
+  "pkb": false,
+  "docurl": "https://analyses.ezpaarse.org/platforms/6a74345077b124f1f9b64ac9",
+  "domains": [
+    "search3.iptech.cc"
+  ],
+  "version": "2026-08-06",
+  "status": "beta"
+}
