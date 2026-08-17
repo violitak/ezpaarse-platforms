@@ -1,8 +1,13 @@
 {
-  "version": "2015-05-18",
+  "version": "2026-08-17",
   "status": "beta",
   "domains": [
-    "heinonline.org"
+    "heinonline.org",
+    "www.heinonline.org",
+    "home.heinonline.org",
+    "heinonline.com",
+    "www.heinonline.com",
+    "access.heinonline.com"
   ],
   "recognize": {
     "rid": [
@@ -23,6 +28,6 @@
   "publisher_name": "William S. Hein & Co.",
   "describe": "Identifie les consultations de la plateforme HeinOnline",
   "docurl": "http://analyses.ezpaarse.org/platforms/552cd997dd8004718c54dd58",
-  "contact": "abderrazzal.loukili@inist.fr",
+  "contact": "Violita Kovchegov",
   "pkb": false
 }
