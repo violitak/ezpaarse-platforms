@@ -30,7 +30,11 @@ module.exports = new Parser(function analyseEC(parsedUrl, ec) {
     }
 
     if (param.handle) {
-      result.unitid = `${param.handle}/${param.id}` ;
+      // the page identifier is given as id= on the older URLs and as page= on the
+      // ones served from access.heinonline.com
+      const pageId = param.id || param.page;
+
+      result.unitid = pageId ? `${param.handle}/${pageId}` : param.handle;
 
       const titleIdMatch = /^[a-z0-9._-]+\/([a-z]+)[0-9]*$/i.exec(param.handle);
       if (titleIdMatch) {
