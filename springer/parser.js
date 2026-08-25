@@ -193,31 +193,6 @@ module.exports = new Parser(function analyseEC(parsedUrl) {
     }
     result.rtype    = 'BOOK';
     result.mime     = 'EPUB';
-
-  } else if ((match = /^\/(10\.[0-9]+\/(.+))$/.exec(path)) !== null) {
-    // DOI landing page, served without an /article, /book or /chapter prefix.
-    // Springer resolves these directly, so they are genuine accesses and not
-    // the front half of a redirect. Kept last in the chain so the explicit
-    // prefixes above always win.
-    // /10.1007/s43681-024-00537-z       journal article
-    // /10.1007/978-3-030-39970-2        book
-    // /10.1007/978-3-031-35469-4_110-1  book section
-    result.doi    = match[1];
-    result.unitid = match[2];
-    result.rtype  = 'ARTICLE';
-    result.mime   = 'HTML';
-
-    if (/^(\d-*){13}(?![\d-])/.test(match[2])) {
-      if (match[2].includes('_')) {
-        result.rtype = 'BOOK_SECTION';
-      } else {
-        // matches the /book/10.1007/978-... case above, which treats a bare
-        // ISBN-shaped DOI as the book landing page rather than a full access
-        result.rtype             = 'TOC';
-        result.mime              = 'MISC';
-        result.online_identifier = match[2];
-      }
-    }
   }
   // title_id can be extracted from the doi
   // /content/pdf/10.1007/s00359-010-0615-4
