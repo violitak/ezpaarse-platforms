@@ -17,7 +17,7 @@ module.exports = new Parser(function analyseEC(parsedUrl) {
     result.rtype    = 'TOC';
     result.mime     = 'MISC';
 
-  } else if ((match = /^\/(article|book|protocol|referenceworkentry)\/(10\.[0-9]+\/([^/]+))(\/page\/[0-9]+)?(\/fulltext.html)?/.exec(path)) !== null) {
+  } else if ((match = /^\/(article|book|protocol|referenceworkentry|referencework|rwe)\/(10\.[0-9]+\/([^/]+))(\/page\/[0-9]+)?(\/fulltext.html)?/.exec(path)) !== null) {
     result.doi    = match[2];
     result.unitid = match[3] + (match[4] || '');
 
@@ -45,11 +45,44 @@ module.exports = new Parser(function analyseEC(parsedUrl) {
       result.rtype = 'BOOK_SECTION';
       result.mime  = 'HTML';
       break;
+    case 'rwe':
+      // short form of referenceworkentry
+      // /rwe/10.1007/978-3-031-35469-4_110-1
+      result.rtype = 'BOOK_SECTION';
+      result.mime  = 'HTML';
+      break;
+    case 'referencework':
+      // the parent reference work, not an entry within it
+      // /referencework/10.1007/978-981-13-0596-2
+      result.rtype = 'TOC';
+      result.mime  = 'MISC';
+      result.online_identifier = match[3];
+      break;
     case 'protocol':
       // /protocol/10.1007/978-1-61779-998-3_39
       result.rtype = 'BOOK';
       result.mime  = 'HTML';
       break;
+    }
+
+  } else if ((match = /^\/book\/((?:\d-*){13})(?![\d-])/.exec(path)) !== null) {
+    // book landing page identified by ISBN rather than DOI
+    // /book/9789819214822
+    result.unitid            = match[1];
+    result.online_identifier = match[1];
+    result.rtype             = 'TOC';
+    result.mime              = 'MISC';
+
+  } else if ((match = /^\/epdf\/(10\.[0-9]+\/(.+?))(\.pdf)?$/.exec(path)) !== null) {
+    // enhanced PDF viewer, same content as /content/pdf
+    // /epdf/10.1007/s41603-023-00224-7
+    result.doi    = match[1];
+    result.unitid = match[2];
+    result.rtype  = 'ARTICLE';
+    result.mime   = 'PDF';
+
+    if (/^(\d-*){13}(?![\d-])/.test(match[2])) {
+      result.rtype = match[2].includes('_') ? 'BOOK_SECTION' : 'BOOK';
     }
 
   } else if ((match = /^\/content\/pdf\/(10\.[0-9]+\/(.+?))(\.pdf)?$/.exec(path)) !== null) {
