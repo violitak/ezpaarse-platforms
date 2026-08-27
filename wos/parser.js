@@ -133,10 +133,73 @@ module.exports = new Parser(function analyseEC(parsedUrl, ec) {
     result.mime   = 'HTML';
     result.db_id  = 'author';
     result.unitid = match[1];
-  } else if (/^\/wos\/woscc\/summary\/[a-z0-9-]+\/relevance\/[0-9]+$/i.test(path)) {
+  } else if ((match = /^\/wos\/woscc\/summary\/(.+)$/i.exec(path)) !== null) {
     // /wos/woscc/summary/98d3b3c5-98aa-48b9-a80c-6be7017120ae-114647f4/relevance/1
-    result.rtype  = 'SEARCH';
+    // /wos/woscc/summary/77df9780-cc32-45f0-89b4-7231d2cf2df4-01bb9e5b15/ee9180f0-20e3-4ff9-a224-e23dce90e23e-01bb9e5b04/relevance/1
+    // /wos/woscc/summary/marked/date-descending/1
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+  } else if ((match = /^\/wos\/alldb\/(basic-search|advanced-search|smart-search)$/i.exec(path)) !== null) {
+    // /wos/alldb/basic-search
+    // /wos/alldb/advanced-search
+    // /wos/alldb/smart-search
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+  } else if ((match = /^\/wos\/alldb\/full-record\/([a-z0-9:]+)$/i.exec(path)) !== null) {
+    // /wos/alldb/full-record/WOS:000578373700001
+    result.rtype  = 'RECORD_VIEW';
     result.mime   = 'HTML';
+    result.unitid = match[1];
+  } else if ((match = /^\/wos\/alldb\/citation-report\/([a-z0-9-]+)$/i.exec(path)) !== null) {
+    // /wos/alldb/citation-report/09ae1f90-518d-4052-95a5-6836d874eea7-010e5e1519
+    result.rtype  = 'ANALYSIS';
+    result.mime   = 'HTML';
+    result.unitid = match[1];
+  } else if ((match = /^\/wos\/alldb\/summary\/(.+)$/i.exec(path)) !== null) {
+    // /wos/alldb/summary/d0a90868-a364-4090-b572-5c81d1ea12ed-01719d6d0e/relevance/1
+    // /wos/alldb/summary/marked/date-descending/1
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+  } else if ((match = /^\/wos\/woscc\/(basic-search|advanced-search|smart-search)$/i.exec(path)) !== null) {
+    // /wos/woscc/basic-search
+    // /wos/woscc/advanced-search
+    // /wos/woscc/smart-search
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+  } else if ((match = /^\/wos\/woscc\/alert-execution-summary\/([a-z0-9-]+)$/i.exec(path)) !== null) {
+    // /wos/woscc/alert-execution-summary/07557d43-ad71-4677-aae1-85b10cf6ba2b
+    result.rtype  = 'SESSION';
+    result.mime   = 'HTML';
+    result.unitid = match[1];
+  } else if (/^\/wos\/op\/publications\/(summary|import-publications)$/i.test(path)) {
+    // /wos/op/publications/summary
+    // /wos/op/publications/import-publications
+    result.rtype = 'RECORD';
+    result.mime  = 'HTML';
+    result.db_id = 'op';
+  } else if (/^\/wos\/author\/(my-profile|search)$/i.test(path)) {
+    // /wos/author/my-profile
+    // /wos/author/search
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+    result.db_id = 'author';
+  } else if (/^\/wos\/author\/author-search$/i.test(path)) {
+    // /wos/author/author-search
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+    result.db_id = 'author';
+  } else if ((match = /^\/wos\/author\/record\/([a-z0-9-]+)$/i.exec(path)) !== null) {
+    // /wos/author/record/1025488
+    // /wos/author/record/A-9549-2008
+    result.rtype  = 'RECORD_VIEW';
+    result.mime   = 'HTML';
+    result.db_id  = 'author';
+    result.unitid = match[1];
+  } else if ((match = /^\/wos\/author\/summary\/(.+)$/i.exec(path)) !== null) {
+    // /wos/author/summary/b1012a46-b1c0-4e34-ba59-6e56c7196f73-01565411c1/doc-relevance/1
+    result.rtype = 'SEARCH';
+    result.mime  = 'HTML';
+    result.db_id = 'author';
   }
 
   return result;
