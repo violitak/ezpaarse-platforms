@@ -1,5 +1,5 @@
 {
-  "version": "2017-01-13",
+  "version": "2026-08-26",
   "status": "beta",
   "domains": [
     "apps.webofknowledge.com",
@@ -25,6 +25,6 @@
   "longname": "Web of Science",
   "describe": "Recognizes the accesses to the platform Web of Science",
   "docurl": "http://analyses.ezpaarse.org/platforms/5878908edb308a343cf604c6",
-  "contact": "abderrazzak.loukili@inist.fr",
+  "contact": "Violita Kovchegov",
   "pkb": false
 }
