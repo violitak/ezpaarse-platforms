@@ -3,13 +3,13 @@
   "name": "4cn",
   "describe": "Recognizes the accesses to the platform 4 Canoes",
   "contact": "Violita Kovchegov",
-  "pkb": false,
+  "pkb": true,
   "docurl": "http://analyses.ezpaarse.org/platforms/617010a107376d3e3f4389b1",
   "domains": [
     "4canoes.com",
     "4canoes.org",
     "4canoesportal.org"
   ],
-  "version": "2026-08-17",
+  "version": "2026-09-01",
   "status": "beta"
 }
